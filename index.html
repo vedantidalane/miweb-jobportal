@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CareerConnect – Home</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+</head>
+
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-briefcase-fill fs-3 text-primary me-2"></i>
+                <span class="h5 mb-0">CareerConnect</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="jobs.html">Find Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#companies">Companies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#career-advice">Career Advice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="candidate-login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="candidate-register.html">Register</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary text-white ms-2"
+                            href="employer-login.html">Post a Job</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="themeToggle"><i class="fas fa-moon"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <span class="hero-tag">
+                <i class="fas fa-briefcase me-2"></i>
+                YOUR CAREER JOURNEY STARTS HERE
+            </span>
+
+            <h1>
+                Find Your <span>Dream Job.</span><br>
+                Build Your Future.
+            </h1>
+
+            <p>
+                Discover thousands of opportunities from leading companies.
+                Find the right job and take the next step in your career.
+            </p>
+
+            <div class="hero-search">
+                <div class="search-field">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchKeyword" placeholder="Job title, skills or keywords">
+                </div>
+
+                <div class="search-field">
+                    <i class="fas fa-location-dot"></i>
+                    <input type="text" id="searchLocation" placeholder="Enter location">
+                </div>
+
+                <div class="search-field">
+                    <i class="fas fa-layer-group"></i>
+                    <select id="searchCategory">
+                        <option value="">All Categories</option>
+                        <option>Software Development</option>
+                        <option>Data Science</option>
+                        <option>Marketing</option>
+                        <option>Finance & Accounting</option>
+                        <option>Human Resources</option>
+                        <option>UI/UX Design</option>
+                    </select>
+                </div>
+
+                <button id="heroSearchBtn" class="hero-search-btn">
+                    Search Jobs <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+
+            <div class="popular-searches">
+                <span>Popular:</span>
+                <a href="jobs.html?q=Java%20Developer">Java Developer</a>
+                <a href="jobs.html?q=Frontend%20Developer">Frontend Developer</a>
+                <a href="jobs.html?q=Data%20Analyst">Data Analyst</a>
+                <a href="jobs.html?q=UI%2FUX%20Designer">UI/UX Designer</a>
+            </div>
+
+            <div class="hero-trust">
+                <div>
+                    <strong>10K+</strong>
+                    <span>Active Jobs</span>
+                </div>
+                <div>
+                    <strong>2.5K+</strong>
+                    <span>Companies</span>
+                </div>
+                <div>
+                    <strong>15K+</strong>
+                    <span>Job Seekers</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Statistics Section -->
+    <section class="py-5 bg-white" id="statistics">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-6 col-md-3">
+                    <i class="fas fa-briefcase fa-2x text-primary mb-2"></i>
+                    <h3 class="h4">10,000+<br />Active Jobs</h3>
+                </div>
+                <div class="col-6 col-md-3">
+                    <i class="fas fa-building fa-2x text-primary mb-2"></i>
+                    <h3 class="h4">2,500+<br />Companies</h3>
+                </div>
+                <div class="col-6 col-md-3">
+                    <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                    <h3 class="h4">15,000+<br />Candidates</h3>
+                </div>
+                <div class="col-6 col-md-3">
+                    <i class="fas fa-fire fa-2x text-primary mb-2"></i>
+                    <h3 class="h4">500+<br />New Jobs Daily</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Categories -->
+    <section class="py-5" id="categories">
+        <div class="container">
+            <h2 class="mb-4 text-center">Explore Jobs by Category</h2>
+            <div class="row g-4">
+                <div class="col-6 col-md-3 text-center">
+                    <i class="fas fa-code fa-2x text-primary mb-2"></i>
+                    <h5>Software Development</h5>
+                    <p class="text-muted">1,200 Jobs</p>
+                    <a href="jobs.html?category=Software%20Development" class="stretched-link"></a>
+                </div>
+                <div class="col-6 col-md-3 text-center">
+                    <i class="fas fa-database fa-2x text-primary mb-2"></i>
+                    <h5>Data Science</h5>
+                    <p class="text-muted">800 Jobs</p>
+                    <a href="jobs.html?category=Data%20Science" class="stretched-link"></a>
+                </div>
+                <div class="col-6 col-md-3 text-center">
+                    <i class="fas fa-bullhorn fa-2x text-primary mb-2"></i>
+                    <h5>Marketing</h5>
+                    <p class="text-muted">600 Jobs</p>
+                    <a href="jobs.html?category=Marketing" class="stretched-link"></a>
+                </div>
+                <div class="col-6 col-md-3 text-center">
+                    <i class="fas fa-calculator fa-2x text-primary mb-2"></i>
+                    <h5>Finance & Accounting</h5>
+                    <p class="text-muted">500 Jobs</p>
+                    <a href="jobs.html?category=Finance%20%26%20Accounting" class="stretched-link"></a>
+                </div>
+                <div class="col-6 col-md-3 text-center">
+                    <i class="fas fa-users-cog fa-2x text-primary mb-2"></i>
+                    <h5>Human Resources</h5>
+                    <p class="text-muted">400 Jobs</p>
+                    <a href="jobs.html?category=Human%20Resources" class="stretched-link"></a>
+                </div>
+                <div class="col-6 col-md-3 text-center">
+                    <i class="fas fa-paint-brush fa-2x text-primary mb-2"></i>
+                    <h5>UI/UX Design</h5>
+                    <p class="text-muted">300 Jobs</p>
+                    <a href="jobs.html?category=UI%2FUX%20Design" class="stretched-link"></a>
+                </div>
+                <div class="col-6 col-md-3 text-center">
+                    <i class="fas fa-handshake fa-2x text-primary mb-2"></i>
+                    <h5>Sales & Business Development</h5>
+                    <p class="text-muted">450 Jobs</p>
+                    <a href="jobs.html?category=Sales%20%26%20Business%20Development" class="stretched-link"></a>
+                </div>
+                <div class="col-6 col-md-3 text-center">
+                    <i class="fas fa-headset fa-2x text-primary mb-2"></i>
+                    <h5>Customer Support</h5>
+                    <p class="text-muted">350 Jobs</p>
+                    <a href="jobs.html?category=Customer%20Support" class="stretched-link"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Jobs -->
+    <section class="py-5 bg-light" id="featuredJobsSection">
+        <div class="container">
+            <h2 class="mb-4 text-center">Featured Job Opportunities</h2>
+            <div class="row" id="featuredJobs"></div>
+            <div class="text-center mt-4">
+                <a href="jobs.html" class="btn btn-outline-primary">View All Jobs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Companies -->
+
+    <!-- TOP COMPANIES SECTION -->
+    <section class="companies-section" id="companies">
+        <div class="container">
+
+            <div class="section-heading text-center">
+                <span class="section-tag">OUR PARTNERS</span>
+                <h2>Top Companies Hiring Now</h2>
+                <p>Explore exciting career opportunities from leading companies.</p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="jobs.html?company=TCS" class="company-card">
+                        <div class="company-logo tcs-logo">TCS</div>
+                        <h6>Tata Consultancy Services</h6>
+                        <span>Technology</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="jobs.html?company=Infosys" class="company-card">
+                        <div class="company-logo infosys-logo">Infosys</div>
+                        <h6>Infosys</h6>
+                        <span>IT Services</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="jobs.html?company=Wipro" class="company-card">
+                        <div class="company-logo wipro-logo">Wipro</div>
+                        <h6>Wipro</h6>
+                        <span>Technology</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="jobs.html?company=Accenture" class="company-card">
+                        <div class="company-logo accenture-logo">accenture</div>
+                        <h6>Accenture</h6>
+                        <span>Consulting</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="jobs.html?company=Capgemini" class="company-card">
+                        <div class="company-logo capgemini-logo">Capgemini</div>
+                        <h6>Capgemini</h6>
+                        <span>IT Services</span>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="jobs.html?company=HCL" class="company-card">
+                        <div class="company-logo hcl-logo">HCLTech</div>
+                        <h6>HCLTech</h6>
+                        <span>Technology</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- How It Works -->
+    <section class="py-5 bg-white" id="how-it-works">
+        <div class="container">
+            <h2 class="mb-5 text-center">Get Hired in 3 Simple Steps</h2>
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                    <h5>Create Your Profile</h5>
+                    <p>Build a professional profile and upload your resume.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-search fa-3x text-primary mb-3"></i>
+                    <h5>Discover Opportunities</h5>
+                    <p>Search and explore jobs that match your skills.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-paper-plane fa-3x text-primary mb-3"></i>
+                    <h5>Apply & Get Hired</h5>
+                    <p>Apply for suitable jobs and track your applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-5" id="why-choose-us">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3>Why Choose CareerConnect?</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Thousands of verified job
+                            opportunities</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Easy job search and filtering
+                        </li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Direct application process</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Resume and profile management
+                        </li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Application tracking</li>
+                        <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Opportunities from top companies
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 text-center">
+
+
+                    <div class="col-md-6 text-center">
+                        <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=90"
+                            class="img-fluid career-illustration" alt="Modern professional office workspace"
+                            loading="lazy" />
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5 bg-light" id="testimonials">
+        <div class="container">
+            <h2 class="mb-5 text-center">What Job Seekers Say</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Avatar" />
+                            <h5 class="card-title">Alex Johnson</h5>
+                            <p class="card-subtitle mb-2 text-muted">Software Engineer</p>
+                            <p class="card-text">"CareerConnect helped me land my dream role in just two weeks! The
+                                platform is intuitive and the job matches were spot on."
+                            </p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Avatar" />
+                            <h5 class="card-title">Maria Garcia</h5>
+                            <p class="card-subtitle mb-2 text-muted">Data Analyst</p>
+                            <p class="card-text">"The filtering options saved me hours of searching. I love the clean
+                                design and the ability to track my applications."
+                            </p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="far fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Avatar" />
+                            <h5 class="card-title">Samir Patel</h5>
+                            <p class="card-subtitle mb-2 text-muted">Marketing Manager</p>
+                            <p class="card-text">"I appreciated the quick apply feature and the real‑time status
+                                updates. Highly recommended for job hunters!"
+                            </p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                    class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section class="py-5 text-center text-white" style="background: linear-gradient(135deg, #0d6efd, #6610f2);">
+        <div class="container">
+            <h2 class="mb-3">Ready to Find Your Next Opportunity?</h2>
+            <p class="mb-4">Join thousands of professionals who have found their dream jobs with CareerConnect.</p>
+            <a href="jobs.html" class="btn btn-light btn-lg me-2">Find a Job</a>
+            <a href="register.html" class="btn btn-outline-light btn-lg">Create Free Account</a>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-5 bg-white" id="newsletter">
+        <div class="container">
+            <h3 class="text-center mb-4">Stay Updated – Subscribe to Our Newsletter</h3>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form id="newsletterForm" class="d-flex">
+                        <input type="email" id="newsletterEmail" class="form-control me-2"
+                            placeholder="Enter your email" required />
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                    <div id="newsletterMsg" class="mt-2 text-center"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <h5>CareerConnect</h5>
+                    <p>Connecting talent with opportunity.</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h6>Candidate</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="login.html" class="text-white text-decoration-none">Login</a></li>
+                        <li><a href="register.html" class="text-white text-decoration-none">Register</a></li>
+                        <li><a href="jobs.html" class="text-white text-decoration-none">Find Jobs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h6>Employer</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="employer-login.html" class="text-white text-decoration-none">Login</a></li>
+                        <li><a href="post-job.html" class="text-white text-decoration-none">Post a Job</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h6>Contact</h6>
+                    <p><i class="fas fa-envelope me-2"></i>support@careerconnect.com</p>
+                    <p><i class="fas fa-phone me-2"></i>+1 (800) 123‑4567</p>
+                    <div>
+                        <a href="#" class="text-white me-2"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <small>&copy; 2024 CareerConnect. All rights reserved.</small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+
+</html>
