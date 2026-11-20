@@ -3,39 +3,262 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Candidate Dashboard - Job Portal</title>
+    <title>Candidate Dashboard - CareerConnect</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
+    <style>
+        .stat-card {
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            background: #fff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+        .item-card {
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            transition: all 0.2s;
+        }
+        .item-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .status-badge {
+            font-size: .75rem;
+            padding: .3rem .65rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .status-Pending     { background: #fff3cd; color: #856404; }
+        .status-Reviewed    { background: #cff4fc; color: #055160; }
+        .status-Shortlisted { background: #d1e7dd; color: #0a3622; }
+        .status-Rejected    { background: #f8d7da; color: #842029; }
+        .status-Selected    { background: #198754; color: #ffffff; }
+
+        body.dark-mode .stat-card,
+        body.dark-mode .item-card,
+        body.dark-mode .card {
+            background: #1e1e1e !important;
+            border-color: #333 !important;
+            color: #e0e0e0;
+        }
+        body.dark-mode .text-muted {
+            color: #aaa !important;
+        }
+    </style>
 </head>
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">JobPortal</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-briefcase-fill fs-3 text-primary me-2"></i>
+                <span class="h5 mb-0">CareerConnect</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
-                    <li class="nav-item"><a class="nav-link" href="candidate-profile.html">Profile</a></li>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="jobs.html">Find Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="companies.html">Companies</a></li>
                     <li class="nav-item"><a class="nav-link" href="my-applications.html">My Applications</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" id="logoutBtn">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="candidate-dashboard.html">Dashboard</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="candidate-profile.html"><i class="fas fa-user-circle me-1"></i>Profile</a></li>
+                    <li class="nav-item"><a class="nav-link text-danger fw-semibold" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-1"></i>Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="themeToggle"><i class="fas fa-moon"></i></a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container">
-        <h2 class="mb-4">Welcome, <span id="candidateName"></span></h2>
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Saved Jobs</h4>
-                <ul class="list-group" id="savedJobsList"></ul>
+
+    <!-- Header Banner -->
+    <div class="bg-white border-bottom py-4 mb-4">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fs-3 fw-bold" style="width:60px;height:60px;" id="avatarInitial">
+                    U
+                </div>
+                <div>
+                    <h3 class="fw-bold mb-0">Welcome, <span id="candidateName">Candidate</span>!</h3>
+                    <p class="text-muted small mb-0"><i class="fas fa-envelope me-1"></i><span id="candidateEmail">email@example.com</span></p>
+                </div>
             </div>
-            <div class="col-md-6">
-                <h4>Recent Applications</h4>
-                <ul class="list-group" id="recentAppsList"></ul>
+            <div class="d-flex gap-2">
+                <a href="jobs.html" class="btn btn-primary"><i class="fas fa-search me-1"></i>Browse Jobs</a>
+                <a href="candidate-profile.html" class="btn btn-outline-secondary"><i class="fas fa-edit me-1"></i>Edit Profile</a>
             </div>
         </div>
     </div>
+
+    <div class="container pb-5">
+
+        <!-- Quick Stats -->
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-md-3">
+                <div class="stat-card p-3 p-md-4">
+                    <span class="text-muted small fw-semibold text-uppercase">Applied Jobs</span>
+                    <h3 class="fw-bold mt-1 mb-0 text-primary" id="dashTotalApps">0</h3>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card p-3 p-md-4">
+                    <span class="text-muted small fw-semibold text-uppercase">Saved Jobs</span>
+                    <h3 class="fw-bold mt-1 mb-0 text-info" id="dashSavedJobs">0</h3>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card p-3 p-md-4">
+                    <span class="text-muted small fw-semibold text-uppercase">Shortlisted</span>
+                    <h3 class="fw-bold mt-1 mb-0 text-success" id="dashShortlisted">0</h3>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-card p-3 p-md-4">
+                    <span class="text-muted small fw-semibold text-uppercase">Selected</span>
+                    <h3 class="fw-bold mt-1 mb-0 text-warning" id="dashSelected">0</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Left: Saved Jobs -->
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0"><i class="fas fa-heart text-danger me-2"></i>Saved Jobs</h5>
+                        <a href="jobs.html" class="small text-primary text-decoration-none">Explore more &rarr;</a>
+                    </div>
+                    <div id="savedJobsList" class="d-flex flex-column gap-2"></div>
+                </div>
+            </div>
+
+            <!-- Right: Recent Applications -->
+            <div class="col-lg-6">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0"><i class="fas fa-clock text-primary me-2"></i>Recent Applications</h5>
+                        <a href="my-applications.html" class="small text-primary text-decoration-none">View all &rarr;</a>
+                    </div>
+                    <div id="recentAppsList" class="d-flex flex-column gap-2"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container text-center">
+            <small>&copy; 2024 CareerConnect. All rights reserved.</small>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/portal.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const candidate = JSON.parse(localStorage.getItem('candidate') || 'null');
+        if (!candidate) {
+            alert('Please login as a candidate first.');
+            window.location.href = 'candidate-login.html';
+            return;
+        }
+
+        const name = candidate.fullName || 'Candidate';
+        document.getElementById('candidateName').textContent = name;
+        document.getElementById('candidateEmail').textContent = candidate.email || '';
+        document.getElementById('avatarInitial').textContent = name.charAt(0).toUpperCase();
+
+        const JOBS_KEY = 'jobs';
+        const SAVED_KEY = 'savedJobs';
+        const APPS_KEY = 'applications';
+
+        const allJobs = JSON.parse(localStorage.getItem(JOBS_KEY) || '[]');
+        let savedIds = JSON.parse(localStorage.getItem(SAVED_KEY) || '[]');
+        const applications = JSON.parse(localStorage.getItem(APPS_KEY) || '[]');
+
+        // Stats
+        document.getElementById('dashTotalApps').textContent = applications.length;
+        document.getElementById('dashSavedJobs').textContent = savedIds.length;
+        document.getElementById('dashShortlisted').textContent = applications.filter(a => a.status === 'Shortlisted').length;
+        document.getElementById('dashSelected').textContent = applications.filter(a => a.status === 'Selected').length;
+
+        // Render Saved Jobs
+        function renderSaved() {
+            const savedContainer = document.getElementById('savedJobsList');
+            if (!savedIds.length) {
+                savedContainer.innerHTML = '<div class="text-center py-4 text-muted"><i class="fas fa-heart-broken fa-2x mb-2 d-block opacity-50"></i>No saved jobs yet.</div>';
+                return;
+            }
+
+            savedContainer.innerHTML = savedIds.map(id => {
+                const j = allJobs.find(job => job.id === id);
+                if (!j) return '';
+                const salaryLPA = j.salary ? (j.salary/100000).toFixed(1) + ' LPA' : '';
+                return `
+                <div class="item-card p-3 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-bold mb-1"><a href="job-details.html?id=${j.id}" class="text-dark text-decoration-none">${j.title}</a></h6>
+                        <small class="text-muted"><i class="fas fa-building me-1"></i>${j.company} &bull; <i class="fas fa-map-marker-alt me-1"></i>${j.location}</small>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a href="apply-job.html?id=${j.id}" class="btn btn-sm btn-outline-success">Apply</a>
+                        <button class="btn btn-sm btn-outline-danger remove-saved" data-id="${j.id}"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            savedContainer.querySelectorAll('.remove-saved').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = btn.dataset.id;
+                    savedIds = savedIds.filter(i => i !== id);
+                    localStorage.setItem(SAVED_KEY, JSON.stringify(savedIds));
+                    document.getElementById('dashSavedJobs').textContent = savedIds.length;
+                    renderSaved();
+                });
+            });
+        }
+        renderSaved();
+
+        // Render Recent Applications
+        const recentContainer = document.getElementById('recentAppsList');
+        if (!applications.length) {
+            recentContainer.innerHTML = '<div class="text-center py-4 text-muted"><i class="fas fa-file-excel fa-2x mb-2 d-block opacity-50"></i>No applications submitted yet.</div>';
+        } else {
+            const recent = applications.slice(-5).reverse();
+            recentContainer.innerHTML = recent.map(app => {
+                const currentStatus = app.status || 'Pending';
+                return `
+                <div class="item-card p-3 d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-bold mb-1">${app.title}</h6>
+                        <small class="text-muted"><i class="fas fa-building me-1"></i>${app.company || 'Company'} &bull; Applied on ${app.appliedOn || 'Recent'}</small>
+                    </div>
+                    <span class="status-badge status-${currentStatus}">${currentStatus}</span>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('candidate');
+            window.location.href = 'index.html';
+        });
+    });
+    </script>
 </body>
 </html>

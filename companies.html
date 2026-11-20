@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Companies - CareerConnect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <style>
+        .company-card {
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: #fff;
+        }
+        .company-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .company-logo {
+            width: 72px;
+            height: 72px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: #f0f4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0d6efd;
+        }
+        .search-bar-wrap {
+            background: linear-gradient(135deg, #0d6efd, #6610f2);
+            padding: 48px 0 32px;
+        }
+        body.dark-mode .company-card {
+            background: #1e1e1e;
+            border-color: #333;
+            color: #e0e0e0;
+        }
+        body.dark-mode .company-card .text-muted { color: #aaa !important; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-briefcase-fill fs-3 text-primary me-2"></i>
+                <span class="h5 mb-0">CareerConnect</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="jobs.html">Find Jobs</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="companies.html">Companies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="candidate-login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="candidate-register.html">Register</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary text-white ms-2" href="employer-login.html">Post a Job</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="themeToggle"><i class="fas fa-moon"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Banner -->
+    <div class="search-bar-wrap text-white text-center">
+        <div class="container">
+            <h2 class="fw-bold mb-2">Top Companies Hiring Now</h2>
+            <p class="mb-4 opacity-75">Search companies and explore their open positions</p>
+            <div class="row justify-content-center g-2">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-0"><i class="fas fa-search text-muted"></i></span>
+                        <input type="text" id="companySearch" class="form-control border-0 py-2" placeholder="Search company name or industry..." />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select id="industryFilter" class="form-select border-0 py-2">
+                        <option value="">All Industries</option>
+                        <option>IT / Software</option>
+                        <option>Finance & Banking</option>
+                        <option>Healthcare</option>
+                        <option>E-Commerce</option>
+                        <option>Consulting</option>
+                        <option>Telecom</option>
+                        <option>Manufacturing</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button id="searchBtn" class="btn btn-light w-100 fw-semibold py-2">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Companies Grid -->
+    <section class="py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="mb-0 fw-semibold" id="resultCount">Showing all companies</h5>
+            </div>
+            <div class="row g-4" id="companiesGrid">
+                <!-- Cards injected by JS -->
+            </div>
+            <div id="noResults" class="text-center py-5" style="display:none;">
+                <i class="fas fa-building fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">No companies found</h5>
+                <p class="text-muted">Try a different search term or industry.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-3">
+        <div class="container text-center">
+            <small>&copy; 2024 CareerConnect. All rights reserved.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+        const companies = [
+            { name: 'Infosys', industry: 'IT / Software', location: 'Bangalore, India', jobs: 320, logo: 'IN', color: '#0071ce' },
+            { name: 'TCS', industry: 'IT / Software', location: 'Mumbai, India', jobs: 450, logo: 'TC', color: '#00205b' },
+            { name: 'Wipro', industry: 'IT / Software', location: 'Bangalore, India', jobs: 280, logo: 'WI', color: '#5b2c8d' },
+            { name: 'Accenture', industry: 'Consulting', location: 'Mumbai, India', jobs: 390, logo: 'AC', color: '#a100ff' },
+            { name: 'Capgemini', industry: 'Consulting', location: 'Pune, India', jobs: 210, logo: 'CA', color: '#0070ad' },
+            { name: 'Deloitte', industry: 'Finance & Banking', location: 'Delhi, India', jobs: 175, logo: 'DE', color: '#86bc25' },
+            { name: 'HCL Technologies', industry: 'IT / Software', location: 'Noida, India', jobs: 300, logo: 'HC', color: '#007db8' },
+            { name: 'Tech Mahindra', industry: 'IT / Software', location: 'Pune, India', jobs: 260, logo: 'TM', color: '#ce1227' },
+            { name: 'Amazon India', industry: 'E-Commerce', location: 'Hyderabad, India', jobs: 410, logo: 'AM', color: '#ff9900' },
+            { name: 'Flipkart', industry: 'E-Commerce', location: 'Bangalore, India', jobs: 180, logo: 'FL', color: '#2874f0' },
+            { name: 'Reliance Jio', industry: 'Telecom', location: 'Mumbai, India', jobs: 140, logo: 'RJ', color: '#0f3cc9' },
+            { name: 'HDFC Bank', industry: 'Finance & Banking', location: 'Mumbai, India', jobs: 220, logo: 'HD', color: '#004c8f' },
+            { name: 'Apollo Hospitals', industry: 'Healthcare', location: 'Chennai, India', jobs: 95, logo: 'AP', color: '#c0392b' },
+            { name: 'L&T Technology', industry: 'Manufacturing', location: 'Mumbai, India', jobs: 130, logo: 'LT', color: '#00529b' },
+            { name: 'Cognizant', industry: 'IT / Software', location: 'Chennai, India', jobs: 340, logo: 'CO', color: '#1a5276' },
+            { name: 'Mindtree', industry: 'IT / Software', location: 'Bangalore, India', jobs: 115, logo: 'MT', color: '#f07d00' },
+        ];
+
+        let filtered = [...companies];
+
+        function renderCards(list) {
+            const grid = document.getElementById('companiesGrid');
+            const noResults = document.getElementById('noResults');
+            const count = document.getElementById('resultCount');
+
+            if (!list.length) {
+                grid.innerHTML = '';
+                noResults.style.display = 'block';
+                count.textContent = 'No companies found';
+                return;
+            }
+            noResults.style.display = 'none';
+            count.textContent = `Showing ${list.length} compan${list.length === 1 ? 'y' : 'ies'}`;
+
+            grid.innerHTML = list.map(c => `
+                <div class="col-sm-6 col-lg-4">
+                    <div class="company-card p-4 h-100 d-flex flex-column">
+                        <div class="d-flex align-items-center mb-3 gap-3">
+                            <div class="company-logo flex-shrink-0" style="background:${c.color}1a; color:${c.color};">${c.logo}</div>
+                            <div>
+                                <h5 class="mb-0 fw-bold">${c.name}</h5>
+                                <small class="text-muted">${c.industry}</small>
+                            </div>
+                        </div>
+                        <p class="text-muted small mb-1"><i class="fas fa-map-marker-alt me-1"></i>${c.location}</p>
+                        <p class="text-muted small mb-3"><i class="fas fa-briefcase me-1"></i>${c.jobs} Open Positions</p>
+                        <div class="mt-auto">
+                            <a href="jobs.html?company=${encodeURIComponent(c.name)}" class="btn btn-outline-primary btn-sm w-100">
+                                View Jobs <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function applyFilters() {
+            const keyword = document.getElementById('companySearch').value.trim().toLowerCase();
+            const industry = document.getElementById('industryFilter').value;
+            filtered = companies.filter(c => {
+                const matchKw = !keyword || c.name.toLowerCase().includes(keyword) || c.industry.toLowerCase().includes(keyword);
+                const matchInd = !industry || c.industry === industry;
+                return matchKw && matchInd;
+            });
+            renderCards(filtered);
+        }
+
+        document.getElementById('searchBtn').addEventListener('click', applyFilters);
+        document.getElementById('companySearch').addEventListener('keyup', e => { if (e.key === 'Enter') applyFilters(); });
+        document.getElementById('industryFilter').addEventListener('change', applyFilters);
+
+        // Initial render
+        renderCards(companies);
+    </script>
+</body>
+</html>

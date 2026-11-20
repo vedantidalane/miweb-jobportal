@@ -3,31 +3,60 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Employer Login - Job Portal</title>
+    <title>Employer Login - CareerConnect</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
 </head>
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">JobPortal</a>
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-briefcase-fill fs-3 text-primary me-2"></i>
+                <span class="h5 mb-0">CareerConnect</span>
+            </a>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="candidate-login.html">Candidate Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="themeToggle"><i class="fas fa-moon"></i></a></li>
+            </ul>
         </div>
     </nav>
-    <div class="container mt-5">
-        <h2 class="mb-4">Employer Login</h2>
-        <form id="employerLoginForm">
-            <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" required />
+
+    <div class="container py-5" style="max-width:480px;">
+        <div class="card border-0 shadow-sm p-4 p-md-5">
+            <div class="text-center mb-4">
+                <div class="bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width:64px;height:64px;">
+                    <i class="fas fa-building text-primary fa-2x"></i>
+                </div>
+                <h4 class="fw-bold mb-1">Employer Login</h4>
+                <p class="text-muted small">Sign in to manage your job postings</p>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" required />
+            <div class="alert alert-info small">
+                <i class="fas fa-info-circle me-1"></i>
+                Demo credentials: <strong>demo@company.com</strong> / <strong>demo123</strong>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+            <form id="employerLoginForm" novalidate>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Email Address</label>
+                    <input type="email" class="form-control" id="email" placeholder="you@company.com" required />
+                    <div class="invalid-feedback">Please enter a valid email.</div>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" required />
+                    <div class="invalid-feedback">Please enter your password.</div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 fw-semibold">
+                    <i class="fas fa-sign-in-alt me-2"></i>Login as Employer
+                </button>
+            </form>
+        </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/employer.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/theme.js"></script>
 </body>
 </html>

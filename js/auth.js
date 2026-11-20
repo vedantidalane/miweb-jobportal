@@ -63,7 +63,7 @@
             save(CANDIDATES_KEY, candidates);
             localStorage.setItem('candidate', JSON.stringify(candidate));
             alert('Profile updated');
-            window.location.href = 'candidate-dashboard.html';
+            window.location.href = 'index.html';
         });
     }
 
@@ -80,7 +80,10 @@
                 return;
             }
             localStorage.setItem('candidate', JSON.stringify(user));
-            window.location.href = 'candidate-dashboard.html';
+            // Redirect back to the page the user was trying to visit (e.g. apply-job)
+            const redirect = localStorage.getItem('redirectAfterLogin');
+            localStorage.removeItem('redirectAfterLogin');
+            window.location.href = redirect || 'index.html';
         });
     }
 

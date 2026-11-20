@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Manage Applications - CareerConnect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <style>
+        .applicant-card {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            transition: all 0.2s;
+        }
+        .applicant-card:hover {
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        }
+        .status-badge {
+            font-size: .8rem;
+            padding: .35rem .75rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .status-Pending     { background: #fff3cd; color: #856404; }
+        .status-Reviewed    { background: #cff4fc; color: #055160; }
+        .status-Shortlisted { background: #d1e7dd; color: #0a3622; }
+        .status-Rejected    { background: #f8d7da; color: #842029; }
+        .status-Selected    { background: #198754; color: #ffffff; }
+
+        body.dark-mode .applicant-card,
+        body.dark-mode .card {
+            background: #1e1e1e !important;
+            border-color: #333 !important;
+            color: #e0e0e0;
+        }
+        body.dark-mode .text-muted {
+            color: #aaa !important;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <i class="bi bi-briefcase-fill fs-3 text-primary me-2"></i>
+                <span class="h5 mb-0">CareerConnect</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="employer-dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="post-job.html">Post a Job</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="manage-applications.html">Manage Applications</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-danger fw-semibold" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-1"></i>Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="themeToggle"><i class="fas fa-moon"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="bg-white border-bottom py-4 mb-4">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div>
+                <h3 class="fw-bold mb-1">Candidate Applications</h3>
+                <p class="text-muted mb-0">Review applicants, download resumes, and update recruitment status.</p>
+            </div>
+            <a href="employer-dashboard.html" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Back to Dashboard
+            </a>
+        </div>
+    </div>
+
+    <div class="container pb-5">
+
+        <!-- Notification Banner -->
+        <div id="statusAlert" class="alert alert-success alert-dismissible fade show mb-4" style="display:none;" role="alert">
+            <i class="fas fa-check-circle me-2"></i><span id="statusAlertMsg">Application status updated successfully!</span>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="card border-0 shadow-sm p-3 mb-4">
+            <div class="row g-3 align-items-center">
+                <div class="col-md-5">
+                    <label class="form-label small fw-semibold mb-1">Filter by Job Posting</label>
+                    <select id="jobFilter" class="form-select form-select-sm">
+                        <option value="">All Jobs</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold mb-1">Filter by Status</label>
+                    <select id="statusFilter" class="form-select form-select-sm">
+                        <option value="">All Statuses</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Reviewed">Reviewed</option>
+                        <option value="Shortlisted">Shortlisted</option>
+                        <option value="Selected">Selected</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold mb-1">Search Candidate</label>
+                    <input type="text" id="candidateSearch" class="form-control form-control-sm" placeholder="Name or email..." />
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications List -->
+        <div id="applicationsList" class="d-flex flex-column gap-3">
+            <!-- Rendered by JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyApplications" class="text-center py-5 card border-0 shadow-sm" style="display:none;">
+            <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+            <h5 class="fw-bold">No applications found</h5>
+            <p class="text-muted">No candidates have applied matching the selected criteria.</p>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container text-center">
+            <small>&copy; 2024 CareerConnect. All rights reserved.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const APPS_KEY = 'applications';
+        const JOBS_KEY = 'jobs';
+
+        // ── Auth Guard: Employer only ───────────────────────────────────
+        const employer = JSON.parse(localStorage.getItem('employer') || 'null');
+        if (!employer) {
+            alert('Please login as an employer.');
+            window.location.href = 'employer-login.html';
+            return;
+        }
+
+        let applications = JSON.parse(localStorage.getItem(APPS_KEY) || '[]');
+        let jobs = JSON.parse(localStorage.getItem(JOBS_KEY) || '[]');
+
+        // Populate Job Filter
+        const jobFilter = document.getElementById('jobFilter');
+        jobs.forEach(j => {
+            const opt = document.createElement('option');
+            opt.value = j.id;
+            opt.textContent = `${j.title} (${j.company})`;
+            jobFilter.appendChild(opt);
+        });
+
+        // Pre-select job filter from URL params if present (e.g. ?jobId=...)
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedJobId = urlParams.get('jobId');
+        if (selectedJobId) {
+            jobFilter.value = selectedJobId;
+        }
+
+        function showAlert(msg) {
+            const alertBox = document.getElementById('statusAlert');
+            document.getElementById('statusAlertMsg').textContent = msg;
+            alertBox.style.display = 'block';
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 3000);
+        }
+
+        function renderApplications() {
+            const listContainer = document.getElementById('applicationsList');
+            const emptyState = document.getElementById('emptyApplications');
+
+            const selectedJob = jobFilter.value;
+            const selectedStatus = document.getElementById('statusFilter').value;
+            const searchQuery = document.getElementById('candidateSearch').value.toLowerCase().trim();
+
+            let filtered = applications.filter(app => {
+                const matchJob = !selectedJob || app.jobId === selectedJob;
+                const matchStatus = !selectedStatus || app.status === selectedStatus;
+                const matchSearch = !searchQuery || 
+                    (app.applicant && app.applicant.toLowerCase().includes(searchQuery)) ||
+                    (app.email && app.email.toLowerCase().includes(searchQuery)) ||
+                    (app.title && app.title.toLowerCase().includes(searchQuery));
+                return matchJob && matchStatus && matchSearch;
+            });
+
+            if (!filtered.length) {
+                listContainer.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            emptyState.style.display = 'none';
+
+            listContainer.innerHTML = filtered.map((app, index) => {
+                // Find actual index in primary applications array
+                const realIndex = applications.findIndex(a => a === app || (a.jobId === app.jobId && a.email === app.email && a.appliedOn === app.appliedOn));
+                const currentStatus = app.status || 'Pending';
+
+                return `
+                <div class="applicant-card p-4">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                        <div class="d-flex align-items-start gap-3">
+                            <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3 d-flex align-items-center justify-content-center" style="width:50px;height:50px;">
+                                <i class="fas fa-user-tie fa-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-1">${app.applicant || 'Candidate Name'}</h5>
+                                <p class="text-muted small mb-2">
+                                    <i class="fas fa-envelope me-1"></i> ${app.email || 'N/A'} &nbsp;|&nbsp;
+                                    <i class="fas fa-calendar-alt me-1"></i> Applied on ${app.appliedOn || 'Recent'}
+                                </p>
+                                <div class="p-2 bg-light rounded d-inline-block">
+                                    <small class="text-dark fw-semibold">
+                                        <i class="fas fa-briefcase text-primary me-1"></i> Position: ${app.title || 'Job Opening'} (${app.company || 'Company'})
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-column align-items-end gap-2">
+                            <span class="status-badge status-${currentStatus}">
+                                Current: ${currentStatus}
+                            </span>
+                            <div class="d-flex align-items-center gap-2 mt-1">
+                                <label class="small fw-semibold text-muted">Update Status:</label>
+                                <select class="form-select form-select-sm status-updater" data-index="${realIndex}" style="width: 140px;">
+                                    <option value="Pending" ${currentStatus === 'Pending' ? 'selected' : ''}>Pending</option>
+                                    <option value="Reviewed" ${currentStatus === 'Reviewed' ? 'selected' : ''}>Reviewed</option>
+                                    <option value="Shortlisted" ${currentStatus === 'Shortlisted' ? 'selected' : ''}>Shortlisted</option>
+                                    <option value="Selected" ${currentStatus === 'Selected' ? 'selected' : ''}>Selected</option>
+                                    <option value="Rejected" ${currentStatus === 'Rejected' ? 'selected' : ''}>Rejected</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+
+            // Bind status update change events
+            listContainer.querySelectorAll('.status-updater').forEach(select => {
+                select.addEventListener('change', (e) => {
+                    const idx = parseInt(e.target.dataset.index);
+                    const newStatus = e.target.value;
+                    if (idx >= 0 && idx < applications.length) {
+                        applications[idx].status = newStatus;
+                        localStorage.setItem(APPS_KEY, JSON.stringify(applications));
+                        showAlert(`Updated status of "${applications[idx].applicant}" to ${newStatus}`);
+                        renderApplications();
+                    }
+                });
+            });
+        }
+
+        // Event listeners for filters
+        jobFilter.addEventListener('change', renderApplications);
+        document.getElementById('statusFilter').addEventListener('change', renderApplications);
+        document.getElementById('candidateSearch').addEventListener('input', renderApplications);
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('employer');
+            window.location.href = 'employer-login.html';
+        });
+
+        // Initial render
+        renderApplications();
+    });
+    </script>
+</body>
+</html>
